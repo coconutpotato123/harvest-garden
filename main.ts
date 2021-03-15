@@ -174,3 +174,5 @@ let rabbit = sprites.create(img`
     `, SpriteKind.Enemy)
 scene.setBackgroundColor(13)
 tiles.setTilemap(tilemap`level`)
+controller.moveSprite(player)
+scene.cameraFollowSprite(player)
