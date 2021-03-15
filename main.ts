@@ -2,6 +2,7 @@ namespace SpriteKind {
     export const Veggie = SpriteKind.create()
     export const Sprout = SpriteKind.create()
 }
+let sprout: Sprite = null
 let veggies = [
 img`
     . . . . . . . . . . . . . . . . 
@@ -174,5 +175,22 @@ let rabbit = sprites.create(img`
     `, SpriteKind.Enemy)
 scene.setBackgroundColor(13)
 tiles.setTilemap(tilemap`level`)
+let availableTiles = tiles.getTilesByType(assets.tile`tile1`)
 controller.moveSprite(player)
 scene.cameraFollowSprite(player)
+info.player1.setScore(0)
+info.player2.setScore(0)
+game.onUpdateInterval(500, function () {
+    if (availableTiles.length> 0){
+    sprout = sprites.create(sproutImg, SpriteKind.Sprout)
+    let groundIndex = randint(0, availableTiles.length-1)
+    let groundTile = availableTiles[groundIndex] 
+    tiles.placeOnTile(sprout, groundTile)
+    availableTiles.removeAt(groundIndex)
+    }
+
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Sprout, function(sprite: Sprite, otherSprite: Sprite) {
+    info.player1.changeScoreBy(1)
+    otherSprite.destroy(effects.trail, 1000)
+})
