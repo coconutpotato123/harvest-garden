@@ -194,3 +194,5 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Sprout, function(sprite: Sprite,
     info.player1.changeScoreBy(1)
     otherSprite.destroy(effects.trail, 1000)
 })
+let intro = `BONJOUR! La Tour Eiffel et Beau, C'est entoure d'oiseaux. Je suis mans dans la mans avec ma famille, dans la paris. Les arbres et le gazon vert souffle de vent sur la terre. Le soleil aime le ciel comme si j'aime la Tour Eiffel.`
+game.showLongText(intro, DialogLayout.Full)
